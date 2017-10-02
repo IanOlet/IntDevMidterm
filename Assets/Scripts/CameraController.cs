@@ -27,7 +27,7 @@ public class CameraController : MonoBehaviour {
         if(measureSpaz)//if the game wants to measure how much you spaz your mouse, measure mouse movements
         {
             totalSpaz += (Mathf.Abs(mouseX) + Mathf.Abs(mouseY));
-            gameScore.text = "Score " + totalSpaz;
+            gameScore.text = "Spaz the mouse to win at Jackbox. \nScore " + totalSpaz;
             timer += Time.deltaTime;
             if(timer >= 4) //Tell the playercontroller that the game is done, and send a number based on score
             {

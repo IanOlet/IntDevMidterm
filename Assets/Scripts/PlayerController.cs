@@ -15,7 +15,8 @@ public class PlayerController : MonoBehaviour {
     public GameObject TV;
 
     public GameObject nearPretzelText;
-    public GameObject nearTVText; 
+    public GameObject nearTVText;
+    public GameObject pretzelMakingText;
 
     public float moveSpeed = 5f;
 
@@ -69,7 +70,7 @@ public class PlayerController : MonoBehaviour {
             inputVector = Vector3.Normalize(inputVector);
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha2) && nearTV)
+        if (Input.GetKeyDown(KeyCode.Alpha2) && nearTV) //If 2 is pressed when near the TV, start the party game minigame
         {
             if (partyGame)
             {
@@ -82,17 +83,19 @@ public class PlayerController : MonoBehaviour {
                 cam.TogglePartyGame(true);
             }
         }
-        if (Input.GetKeyDown(KeyCode.Alpha1) && nearDough)
+        if (Input.GetKeyDown(KeyCode.Alpha1) && nearDough) //If 1 is pressed when near pretzels, start making pretzels or stop the minigame
         {
             if(pretzelMake)
             {
                 pretzelMake = false;
+                pretzelMakingText.SetActive(false);
                 pretzelController.resetBaking();
                 pretzels.gameObject.SetActive(false);
             }
             else
             {
                 pretzelMake = true;
+                pretzelMakingText.SetActive(true);
                 pretzels.gameObject.SetActive(true);
                 doughModel.SetActive(true);
                 pretzelModel.SetActive(false);
@@ -102,6 +105,7 @@ public class PlayerController : MonoBehaviour {
         {
             if(pretzelController.makePretzels())
             {
+                pretzelMakingText.SetActive(false);
                 pretzelMake = false;
                 pretzelController.resetBaking();
                 pretzels.gameObject.SetActive(false);
