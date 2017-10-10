@@ -27,22 +27,25 @@ public class CameraController : MonoBehaviour {
         if(measureSpaz)//if the game wants to measure how much you spaz your mouse, measure mouse movements
         {
             totalSpaz += (Mathf.Abs(mouseX) + Mathf.Abs(mouseY));
-            gameScore.text = "Spaz the mouse to win at Jackbox. \nScore " + totalSpaz;
+            gameScore.text = "Spaz the mouse for artistic expression. \nScore " + totalSpaz;
             timer += Time.deltaTime;
             if(timer >= 4) //Tell the playercontroller that the game is done, and send a number based on score
             {
                 measureSpaz = false;
                 if (totalSpaz < 2750f) //Low score
                 {
-                    player.PartyGameIsDone(0);
+                    player.PartyGameIsDone();
+                    gameScore.text += "\nYou didn't do very well...";
                 }
                 else if (totalSpaz < 5000f) //Medium score
                 {
-                    player.PartyGameIsDone(1);
+                    player.PartyGameIsDone();
+                    gameScore.text += "\nYou did okay.";
                 }
                 else
                 {
-                    player.PartyGameIsDone(2); //High score
+                    player.PartyGameIsDone();
+                    gameScore.text += "\nYou won the party game. Tryhard.";
                 }
                 
             }

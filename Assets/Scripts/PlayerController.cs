@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
 
+    //test to check door opening
+
     Vector3 inputVector;
     Rigidbody rb;
     public CameraController cam;
@@ -17,17 +19,20 @@ public class PlayerController : MonoBehaviour {
     public GameObject nearPretzelText;
     public GameObject nearTVText;
     public GameObject pretzelMakingText;
+    public GameObject pretzelEatingText;
 
     public float moveSpeed = 5f;
 
     public bool partyGame;
     public bool pretzelMake;
+    public bool pretzelEat; //Set this to true at the end, when they're eating pretzels
     bool nearTV = false;
     bool nearDough = false;
 
     bool showPartyScore;
     int partyPerformance;
     float scoreTimer;
+    int pretzelsMade = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -91,6 +96,7 @@ public class PlayerController : MonoBehaviour {
                 pretzelMakingText.SetActive(false);
                 pretzelController.resetBaking();
                 pretzels.gameObject.SetActive(false);
+                pretzelsMade++; //Keeps track of how many pretzels the player made, comment on the number.
             }
             else
             {
@@ -111,6 +117,15 @@ public class PlayerController : MonoBehaviour {
                 pretzels.gameObject.SetActive(false);
                 pretzelModel.SetActive(true);
                 doughModel.SetActive(false);
+            }
+        }
+        if(pretzelEat && Input.GetKeyDown(KeyCode.Space)) //Eating pretzels is the same as making them, but activated differently. Add particle effects that show eating.
+        {
+            if(pretzelController.makePretzels())
+            {
+                pretzelEatingText.SetActive(false);
+                pretzelEat = false;
+                pretzelController.resetBaking();
             }
         }
 
@@ -136,15 +151,10 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    public void PartyGameIsDone (int performance)
+    public void PartyGameIsDone ()
     {
-        scoreTimer = 0;
-        partyPerformance = performance;
-        //Set messages to active based on partyPerformance
-        //0: Subtle nuanced humor was lost on these philistines.
-        //1: You did okay.
-        //2: You managed to tryhard in a fun party game. Great job.
         showPartyScore = true;
+        scoreTimer = 0;
     }
 
 }
