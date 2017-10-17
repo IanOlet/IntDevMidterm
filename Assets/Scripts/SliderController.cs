@@ -20,7 +20,7 @@ public class SliderController : MonoBehaviour {
 
     public bool makePretzels()
     {
-        effort += 3;
+        effort += 6;
         if(effort >= 100)
         {
             return true;
