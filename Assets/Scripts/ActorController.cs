@@ -5,6 +5,7 @@ using UnityEngine;
 public class ActorController : MonoBehaviour {
 
     public Transform waypoint;
+    public Transform focus;
 
 	// Use this for initialization
 	void Start () {
@@ -22,6 +23,9 @@ public class ActorController : MonoBehaviour {
             }
 
             transform.position += moveDirection * Time.deltaTime * 2f;
+
+            //Transform focusModel = focus.GetComponent<Transform>();
+            transform.LookAt(focus);
         }
     }
 }

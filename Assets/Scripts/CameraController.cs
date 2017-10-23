@@ -24,7 +24,7 @@ public class CameraController : MonoBehaviour {
         float mouseX = Input.GetAxis("Mouse X");
         float mouseY = Input.GetAxis("Mouse Y");
 
-        if(measureSpaz)//if the game wants to measure how much you spaz your mouse, measure mouse movements
+        if(measureSpaz)//Remnants of old party game code.
         {
             totalSpaz += (Mathf.Abs(mouseX) + Mathf.Abs(mouseY));
             gameScore.text = "Spaz the mouse for artistic expression. \nScore " + totalSpaz;

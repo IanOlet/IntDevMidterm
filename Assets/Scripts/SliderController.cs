@@ -5,35 +5,50 @@ using UnityEngine.UI;
 
 public class SliderController : MonoBehaviour {
 
-    private Slider pretzels;
-    private int effort;
+    private Slider slide;
+    private int effort = 0;
+
+    public bool timed;
 
 	// Use this for initialization
 	void Start () {
-        pretzels = GetComponent<Slider>();
+        slide = GetComponent<Slider>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        pretzels.value = effort;
+        slide.value = effort;
 	}
 
-    public bool makePretzels()
+    public bool progress()
     {
-        effort += 6;
-        if(effort >= 100)
+        if (timed)
         {
-            return true;
+            effort += 2;
+            return false;
         }
         else
         {
-            return false;
+            effort += 6;
+            if (effort >= 100)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 
-    public void resetBaking()
+    public int timeUp()
+    {
+        return effort;
+    }
+
+    public void reset()
     {
         effort = 0;
-        pretzels.value = effort;
+        slide.value = effort;
     }
 }
